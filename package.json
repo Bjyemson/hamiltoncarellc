@@ -1,0 +1,27 @@
+{
+  "name": "hamilton-care-ready",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "npx kill-port 3000 || echo 'No process on port 3000'",
+    "dev": "npm run predev && next dev -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^10.18.0",
+    "lucide-react": "^0.546.0",
+    "next": "^12.3.1",
+    "postcss": "^8.5.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-feather": "^2.0.10",
+    "react-icons": "^5.5.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1"
+  }
+}

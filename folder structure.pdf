@@ -1,0 +1,16 @@
+hamilton_care_ready/
+├── pages/
+│   ├── index.js
+│   ├── admin/
+│   │   └── inbox.js     ← your PIN-protected admin inbox
+│   └── api/
+│       └── messages.js  ← (will handle form submissions soon)
+├── components/
+│   ├── Header.js
+│   ├── Footer.js        ← contains the Admin Access link
+│   └── ...
+├── data/
+│   └── messages.json    ← where messages will be stored locally
+├── public/
+│   └── hero-bg.jpg.png
+└── package.json
