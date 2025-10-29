@@ -1,39 +1,60 @@
-import fs from 'fs'
-import path from 'path'
+import { Resend } from "resend";
+import formidable from "formidable";
+import fs from "fs";
 
-export default function handler(req, res) {
-  const dataDir = path.join(process.cwd(), 'data')
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir)
-  const file = path.join(dataDir, 'applications.json')
+export const config = { api: { bodyParser: false } };
 
-  if (req.method === 'POST') {
-    const { name, email, phone, services } = req.body
-    if (!name || !email) return res.status(400).json({ error: 'name and email required' })
-    const entry = { id: Date.now(), name, email, phone, services, createdAt: new Date().toISOString() }
-    let arr = []
-    try {
-      if (fs.existsSync(file)) {
-        const raw = fs.readFileSync(file, 'utf8') || '[]'
-        arr = JSON.parse(raw)
-      }
-    } catch (e) {
-      console.error('read error', e)
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+
+  try {
+    const form = formidable({ multiples: false });
+    const [fields, files] = await new Promise((resolve, reject) => {
+      form.parse(req, (err, fields, files) => (err ? reject(err) : resolve([fields, files])));
+    });
+
+    const name = fields.name || fields?.name?.toString();
+    const email = fields.email || fields?.email?.toString();
+    const phone = fields.phone || fields?.phone?.toString();
+    const position = fields.position || fields?.position?.toString();
+    const message = fields.message || "";
+
+    if (!name || !email || !phone || !position) {
+      return res.status(400).json({ error: "Missing required fields (name, email, phone, position)." });
     }
-    arr.unshift(entry)
-    try {
-      fs.writeFileSync(file, JSON.stringify(arr, null, 2))
-      return res.json({ ok: true })
-    } catch (e) {
-      console.error('write error', e)
-      return res.status(500).json({ error: 'failed to save' })
+
+    let attachments = [];
+    if (files?.resume) {
+      const resume = Array.isArray(files.resume) ? files.resume[0] : files.resume;
+      const buffer = fs.readFileSync(resume.filepath);
+      attachments.push({
+        filename: resume.originalFilename || resume.newFilename || "resume",
+        content: buffer.toString("base64"),
+      });
     }
-  } else if (req.method === 'GET') {
-    if (fs.existsSync(file)) {
-      const raw = fs.readFileSync(file, 'utf8') || '[]'
-      return res.json(JSON.parse(raw))
-    }
-    return res.json([])
-  } else {
-    res.status(405).end()
+
+    const html = `
+      <h2>New Application</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Position:</strong> ${position}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `;
+
+    const result = await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO,
+      subject: `Application: ${position} — ${name}`,
+      html,
+      attachments,
+    });
+
+    return res.status(200).json({ ok: true, id: result?.id || null });
+  } catch (err) {
+    console.error("API /api/apply error:", err);
+    return res.status(500).json({ error: "Internal server error." });
   }
 }

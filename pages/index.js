@@ -106,7 +106,7 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      {/* ✅ SERVICES SECTION */}
+      {/* ✅ CORE-VALUES SECTION */}
       <motion.section
         className="py-20 bg-indigo-50"
         variants={containerVariants}
@@ -122,29 +122,22 @@ export default function Home() {
             variants={sectionVariants}
             className="text-3xl md:text-4xl font-bold text-indigo-800 mb-12"
           >
-            Partnership Program
+           The Values That Define Us !
           </motion.h2>
 
           <motion.p
             variants={sectionVariants}
             className="text-gray-600 max-w-2xl mx-auto mb-10"
           >
-            At Hamilton Care, we believe care starts with family. Through our
-            Family Partnership Program, we make it possible for your trusted
-            loved ones or close friends to become certified caregivers. Once
-            they’ve completed our simple qualification process, they can join
-            our team of Direct Support Professionals (DSPs)—delivering
-            personalized Participant Assistance and Care (PAC) and short-term
-            Respite Care that keeps your family supported, comfortable, and
-            cared for every step of the way.
+            At the heart of our organization lies a set of enduring principles that guide every decision, action and innovation. These values- Integrity, Excellence, Collaboration, Innovation, and Empathy - are not just words on a page; they are the compass that shapes our culture and drives our mission forward.
           </motion.p>
 
           <motion.div variants={sectionVariants} className="mt-12">
             <Link
-              href="/services"
+              href="/core-values"
               className="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-indigo-700 transition"
             >
-              View All Services
+              Our Core-Values
             </Link>
           </motion.div>
         </motion.div>
@@ -211,7 +204,7 @@ export default function Home() {
             variants={sectionVariants}
             className="text-indigo-100 mb-8"
           >
-            Are you passionate about making a difference? Hamilton Care LLC is
+           At Hamilton Care, we believe care starts with family. Through our Family Partnership Program, we make it possible for your trusted loved ones or close friends to become certified caregivers. Once they’ve completed our simple qualification process, they can join our team of Direct Support Professionals (DSPs)—delivering personalized Participant Assistance and Care (PAC) and short-term Respite Care that keeps your family supported, comfortable, and cared for every step of the way.  Are you passionate about making a difference? Hamilton Care LLC is
             always looking for dedicated caregivers who share our mission of
             compassion and dignity.
           </motion.p>

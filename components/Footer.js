@@ -1,98 +1,71 @@
-function Footer() {
+// components/Footer.js
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
+
+export default function Footer() {
   return (
-    <footer className="bg-indigo-900 text-white mt-20">
-      <div className="max-w-7xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-8">
-        {/* ✅ Column 1 */}
+    <footer className="bg-gray-900 text-gray-200 py-12 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* Column 1 - Brand */}
         <div>
-          <h3 className="text-xl font-semibold mb-3">Hamilton Care LLC</h3>
-          <p className="text-sm text-indigo-200">
-            Compassionate care, comfort, and dignity — every day, for every client.
+          <h2 className="text-2xl font-bold text-white mb-4">Hamilton Care</h2>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Providing compassionate, reliable, and professional care for your loved ones.
+            We’re committed to improving quality of life and ensuring peace of mind for every family.
           </p>
         </div>
 
-        {/* ✅ Column 2 */}
+        {/* Column 2 - Contact Info */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
-          <ul className="space-y-2 text-indigo-200">
-            <li>
-              <Link href="/about" className="hover:text-white transition">
-                About Us
-              </Link>
+          <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
+          <ul className="space-y-3 text-sm">
+            <li className="flex items-center gap-2">
+              <Phone size={16} /> <span>+1 463 280 5624</span>
             </li>
-            <li>
-              <Link href="/services" className="hover:text-white transition">
-                Services
-              </Link>
+            <li className="flex items-center gap-2">
+              <Mail size={16} /> <span>info@hamiltoncarellc.com</span>
             </li>
-            <li>
-              <Link href="/core-values" className="hover:text-white transition">
-                Core Values
-              </Link>
-            </li>
-            <li>
-              <Link href="/career" className="hover:text-white transition">
-                Career
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-white transition">
-                Contact
-              </Link>
+            <li className="flex items-start gap-2">
+              <MapPin size={16} className="mt-0.5" />
+              <span>8704 Montery Rd, Indianapolis, IN 46226</span>
             </li>
           </ul>
         </div>
 
-        {/* ✅ Column 3 - Contact info ABOVE social links */}
+        {/* Column 3 - Social Links */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Contact</h4>
-
-          {/* Contact Info */}
-          <p className="text-indigo-200 mb-4">
-            📍 8704 Montery Rd, Indianapolis, IN 46226 <br />
-            📞 +1 (317) 332-7577 <br />
-            ✉️ info@hamiltoncare.com
-          </p>
-
-          {/* Social Icons */}
-          <div className="flex gap-4 mt-2">
+          <h3 className="text-lg font-semibold text-white mb-4">Connect with Us</h3>
+          <div className="flex space-x-4">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/17UPsywqDp/?mibextid=wwXIfr"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook"
+              className="hover:text-blue-400 transition-colors"
             >
-              <Facebook className="w-6 h-6 text-indigo-200 hover:text-white transition" />
+              <Facebook size={20} />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://x.com/hamiltonll58355?s=11 "
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram"
+              className="hover:text-sky-400 transition-colors"
             >
-              <Instagram className="w-6 h-6 text-indigo-200 hover:text-white transition" />
+              <Twitter size={20} />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://www.instagram.com/hamiltoncare_llc?igsh=cTQyZHBvb28wOHN3&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Twitter"
+              className="hover:text-pink-400 transition-colors"
             >
-              <Twitter className="w-6 h-6 text-indigo-200 hover:text-white transition" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-6 h-6 text-indigo-200 hover:text-white transition" />
+              <Instagram size={20} />
             </a>
           </div>
         </div>
       </div>
 
-      <div className="bg-indigo-950 py-4 text-center text-sm text-indigo-300">
-        © {new Date().getFullYear()} Hamilton Care LLC. All rights reserved.
+      {/* Bottom section */}
+      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} Hamilton Care. All rights reserved.
       </div>
     </footer>
   );
